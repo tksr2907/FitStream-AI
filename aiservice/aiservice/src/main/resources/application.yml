@@ -1,0 +1,15 @@
+server:
+  port: 9093
+
+spring:
+  application:
+    name: aiservice
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/airecommendationfitness
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9092/eureka/
