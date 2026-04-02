@@ -6,6 +6,8 @@ import com.fitness.activityservice.dto.ActivityRequest;
 import com.fitness.activityservice.dto.ActivityResponse;
 import com.fitness.activityservice.model.Activity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,14 +16,20 @@ public class ActivityService {
 
     private final ActivityRepository activityRepository;
     private final UserValidationService userValidationService;
+    //KafkaTemplate is a class provided by Spring Kafka that helps you send messages to Apache Kafka easily.
+    private final KafkaTemplate<String,Activity> kafkaTemplate;
+
+    @Value("${kafka.topic.name}")
+    private String topicName;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
-
+    //1.check valid user id or not.
        boolean isValidUser = userValidationService.validateUser(request.getUserId());
        if(!isValidUser){
            throw new RuntimeException("Invalid user:"+ request.getUserId());
        }
 
+       //2.you are converting request->entity(DB object)
         Activity activity= Activity.builder()
                 .userId(request.getUserId())
                 .type(request.getType())
@@ -31,10 +39,22 @@ public class ActivityService {
                 .additionalMetrics(request.getAdditionalMetrics())
                 .build();
 
+       //3.save to database.
         Activity savedActivity= null;
 
             savedActivity = activityRepository.save(activity);
 
+            //4.send event to kafka(Kafka stores this message in a topic)
+            //kafka stores message be like-:
+            //Topic: activity-topic
+            //Message:
+            //Key: user123,Value: { activity details }
+        try {
+            kafkaTemplate.send(topicName,savedActivity.getUserId(),savedActivity);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         return mapToResponse(savedActivity);
     }
 

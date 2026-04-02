@@ -20,7 +20,7 @@ public class ActivityMessageListener {
 
 
 //6.this method is automatically triggered when a message arrives.kafka pushes message to listener.
-    @KafkaListener(topics = "${kafka.topic.name}",groupId = "activity-processor-group")
+    @KafkaListener(topics = "${kafka.topic.name:activity-topic}",groupId = "activity-processor-group")
     public void processActivity(Activity activity){
         log.info("Received Activity for processing: {}", activity.getUserId());
       //7.Here activityAIService is called
