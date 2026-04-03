@@ -2,19 +2,10 @@ server:
   port: 9091
 
 spring:
-  application:
-    name: activity-service
-
-  config:
-    import: optional:configserver:http://localhost:9097
-  cloud:
-    config:
-      username: admin
-      password: admin
-
   data:
     mongodb:
       uri: mongodb://localhost:27017/fitnessrecommendation
+      database: fitnessrecommendation
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -34,3 +25,6 @@ eureka:
 kafka:
   topic:
     name: activity-topic
+
+instance:
+  prefer-ip-address: true
