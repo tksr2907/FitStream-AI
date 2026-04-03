@@ -2,14 +2,11 @@ server:
   port: 9099
 
 spring:
-  config:
-    import: optional:configserver:http://localhost:9097
-
   security:
     oauth2:
-      resource-server:
+      resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8181/realms/fitness-app-realm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8181/realms/fitness-app
 
   cloud:
     gateway:
