@@ -7,7 +7,6 @@ spring:
 
   config:
     import: optional:configserver:http://localhost:9097
-
   cloud:
     config:
       username: admin
@@ -19,6 +18,7 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
+
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -26,7 +26,8 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9098/eureka/   # ⚠ fix this port
+      defaultZone: http://localhost:9098/eureka/
+
   instance:
     prefer-ip-address: true
 

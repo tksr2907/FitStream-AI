@@ -6,10 +6,6 @@ spring:
     name: configserver
   profiles:
     active: native
-  security:
-    user:
-      name: admin
-      password: admin
   cloud:
     config:
       server:
