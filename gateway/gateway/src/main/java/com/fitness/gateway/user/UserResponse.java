@@ -1,6 +1,9 @@
-package com.fitness.userservice.dto;
+package com.fitness.gateway.user;
+
 import lombok.Data;
+
 import java.time.LocalDateTime;
+
 //userresponse sends data back to client.
 @Data//we get all getter ,setter and constructor.
 public class UserResponse {

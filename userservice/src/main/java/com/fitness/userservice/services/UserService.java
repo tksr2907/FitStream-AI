@@ -17,8 +17,22 @@ public class UserService {
     //using dependency injection via autowired .spring automatically injects the repository bean into the services.
     private final UserRepository repository;
     public @Nullable UserResponse register(RegisterRequest request) {
+
         if(repository.existsByEmail(request.getEmail())){
-     throw new RuntimeException("email already exist");
+            User existingUser = repository.findByEmail(request.getEmail());
+
+            //this is waht you return to client
+            UserResponse userResponse=new UserResponse();
+
+            userResponse.setId(existingUser.getId());
+            userResponse.setPassword(existingUser.getPassword());
+            userResponse.setEmail(existingUser.getEmail());
+            userResponse.setFirstName(existingUser.getFirstName());
+            userResponse.setLastName(existingUser.getLastName());
+            userResponse.setCreatedAt(existingUser.getCreatedAt());
+            userResponse.setUpdatedAt(existingUser.getUpdatedAt());
+
+            return userResponse;
         }
 
 
@@ -27,6 +41,7 @@ public class UserService {
         //copy data from request to user means taking data from API request putting into user entity
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
+        user.setKeycloakId(request.getKeycloakId());
         user.setLastName(request.getLastName());
         user.setPassword(request.getPassword());
 
@@ -36,7 +51,7 @@ public class UserService {
         //this is waht you return to client
         UserResponse userResponse=new UserResponse();
 
-        userResponse.setId(savedUser.getId());
+        userResponse.setKeycloakId(savedUser.getKeycloakId());
         userResponse.setPassword(savedUser.getPassword());
         userResponse.setEmail(savedUser.getEmail());
         userResponse.setFirstName((savedUser.getFirstName()));
@@ -66,7 +81,7 @@ public class UserService {
 
     public Boolean existByUserId(String userId) {
         log.info("calling usr service for{}",userId);
-       return repository.existsById(userId);
+       return repository.existsByKeycloakId(userId);
 
     }
 }
@@ -94,4 +109,6 @@ public class UserService {
 //    public User(String name, String email) {
 //        this.name = name;
 //        this.email = email;
+//Synchronization means controlling access to shared resources
+// so that only one process/thread uses it at a time, preventing conflicts or incorrect results.
 
