@@ -5,12 +5,6 @@
     <file url="file://$PROJECT_DIR$/aiservice/aiservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/configserver/configserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka/eureka/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/activityservice/activityservice/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/aiservice/aiservice/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/configserver/configserver/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/eureka/eureka/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/gateway/gateway/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/fitness-backend/userservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway/gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/userservice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/userservice/userservice/src/main/java" charset="UTF-8" />
